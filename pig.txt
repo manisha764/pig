@@ -1,0 +1,29 @@
+pig
+
+https://dlcdn.apache.org/pig/pig-0.17.0/
+
+.bashrc file
+
+export PIG_HOME=/home/hadoop/pig
+export PATH =$PATH:/home/hadoop/pig/bin
+export PIG_CLASSPATH=$HADOOP_HOME/conf
+
+
+pig.properties file
+In the conf folder of Pig, we have a file named pig.properties. In the pig.properties
+file, you can set various parameters as given below.
+pig -h properties
+
+
+$ pig –version
+
+run pig using following command in local mode without using hadoop
+pig -x local
+
+
+Write a Pig Script for solving counting problems.
+lines = LOAD '/home/hadoop/textfile.txt' AS (line:chararray);
+words = FOREACH lines GENERATE FLATTEN(TOKENIZE(line)) as word;
+grouped = GROUP words BY word;
+wordcount = FOREACH grouped GENERATE group, COUNT(words);
+DUMP wordcount;
